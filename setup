@@ -1,0 +1,42 @@
+#!/bin/bash
+
+
+cd $HOME/.rpset/
+for f in *
+do
+
+cd $HOME
+
+if [ -f ".$f" ]
+then
+cp -p ".$f" ".$f".$(date +%y%m%d%H%M%S)
+rm ".$f"
+ln -s ".rpset/$f" ".$f"
+echo ".$f backed up and link created to .rpset/$f"
+ls -l ".$f"
+else
+ln -s ".rpset/$f" ".$f"
+echo "link created between .$f and .rpset/$f"
+fi
+
+done
+
+if [ -f ".bashrc" ]
+then
+cp -p ".bashrc" ".bashrc".$(date +%y%m%d%H%M%S)
+rm ".bashrc"
+ln -s ".rpset/bashrc" ".bashrc"
+else
+echo ".bashrc is not a regular file."
+fi
+
+if [ -f ".screenrc" ]
+then
+cp -p ".screenrc" ".screenrc".$(date +%y%m%d%H%M%S)
+rm ".screenrc"
+ln -s ".rpset/screenrc" ".screenrc"
+else
+echo ".screenrc is not a regular file."
+fi
+
+
